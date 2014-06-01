@@ -1,20 +1,34 @@
 var tx="";
+var nodes=[];
+var links=[];
 var a=document.getElementsByTagName("body");
 getchildtext(a[0]);
-document.body.innerHTML = tx;
-document.body.style.backgroundColor='#FFFFFF';
+
+for (var i=0; i<nodes.length; i++) {
+	nodes[i].appendChild(links[i]);
+}
 
 function getchildtext(args) {
 	if (args.nodeName == "#text") {
 		tmp=args.nodeValue.match(/v=[0-9a-zA-Z_\-]*/);
 		if (tmp != null) {
 			uri = "http://www.youtube.com/watch?" + tmp[0];
-			tx += '<a target="_blank" href="' + uri + '">' + uri + '</a><br />';
+			var link = document.createElement('a');
+			link.setAttribute("href", uri);
+			link.setAttribute("target", "_blank");
+			link.appendChild(document.createTextNode(uri));
+			nodes.push(args.parentNode);
+			links.push(link);
 		} else {
 			tmp=args.nodeValue.match(/(s|n)m[0-9]+/);
 			if (tmp != null) {
 				uri = "http://www.nicovideo.jp/watch/" + tmp[0];
-				tx += '<a target="_blank" href="' + uri + '">' + uri + '</a><br />';
+				var link = document.createElement('a');
+				link.setAttribute("href", uri);
+				link.setAttribute("target", "_blank");
+				link.appendChild(document.createTextNode(uri));
+				nodes.push(args.parentNode);
+				links.push(link);
 			}
 		}
 	}
