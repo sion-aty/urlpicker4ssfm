@@ -29,7 +29,19 @@ function getchildtext(args) {
 				link.appendChild(document.createTextNode(uri));
 				nodes.push(args.parentNode);
 				links.push(link);
+			} else {
+				tmp = args.nodeValue.match(/youtu.be\/[a-zA-Z0-9]+/);
+				if (tmp != null) {
+					uri = "http://" + tmp[0];
+					var link = document.createElement('a');
+					link.setAttribute("href", uri);
+					link.setAttribute("target", "_blank");
+					link.appendChild(document.createTextNode(uri));
+					nodes.push(args.parentNode);
+					links.push(link);
+				}
 			}
+					
 		}
 	}
 	if (args.hasChildNodes()) {
