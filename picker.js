@@ -30,7 +30,7 @@ function getchildtext(args) {
 				nodes.push(args.parentNode);
 				links.push(link);
 			} else {
-				tmp = args.nodeValue.match(/youtu.be\/[a-zA-Z0-9]+/);
+				tmp = args.nodeValue.match(/youtu.be\/[a-zA-Z0-9_]+/);
 				if (tmp != null) {
 					uri = "http://" + tmp[0];
 					var link = document.createElement('a');
